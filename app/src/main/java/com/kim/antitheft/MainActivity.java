@@ -7,12 +7,23 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
 
     MyBroadcastReceiver receiver;
+    ImageView img;
+    TextView textView;
+//    Switch sw;
+    RadioGroup rg;
+    RadioButton detectUSB;
+    RadioButton detectMove;
     ToggleButton toggleButton;
 
     @Override
@@ -20,47 +31,80 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        img = (ImageView) findViewById(R.id.img);
+        textView = (TextView) findViewById(R.id.textView);
+//        sw = (Switch) findViewById(R.id.sw);
+        rg = (RadioGroup) findViewById(R.id.rg);
+        detectUSB = (RadioButton) findViewById(R.id.detectUSB);
+        detectMove = (RadioButton) findViewById(R.id.detectMove);
         toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
 
-        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        detectMove.setChecked(true);
+
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-                if(isChecked){
+                if(checkedId == R.id.detectUSB){
 
-                    receiver = new MyBroadcastReceiver();
-                    IntentFilter intentFilter = new IntentFilter();
-                    intentFilter.addAction(Intent.ACTION_POWER_CONNECTED);
-                    intentFilter.addAction(Intent.ACTION_POWER_DISCONNECTED);
-                    registerReceiver(receiver, intentFilter);
+                    textView.setText("dkdkdkdkddkdk");
 
-                }else {
-                    unregisterReceiver(receiver);
+                    toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {              // 충전기 감지모드 작동
+
+                            if(isChecked){                                                           // ON
+
+                                receiver = new MyBroadcastReceiver();
+                                IntentFilter intentFilter = new IntentFilter();
+                                intentFilter.addAction(Intent.ACTION_POWER_CONNECTED);
+                                intentFilter.addAction(Intent.ACTION_POWER_DISCONNECTED);
+                                registerReceiver(receiver, intentFilter);
+
+                            }else {                                                                  // OFF
+                                unregisterReceiver(receiver);
+                            }
+                        }
+                    });
+
+                }else if (checkedId == R.id.detectMove){
+
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "움직임 감지",
+                            Toast.LENGTH_SHORT
+                    ).show();
                 }
             }
         });
 
     }// onCreate
 
-    public void onToggleClicked(View v){
+    public void onToggleClicked(View v){                                                             // 토글버튼 클릭 시 Toast
 
         boolean on = ((ToggleButton) v).isChecked();
 
-        if(on){                                                                                      // 실행
+        if(on){                                                                                      // ON
 
-            Toast.makeText(
+            img.setImageResource(R.drawable.ic_alarm_on_black_24dp);
+            textView.setText("도난방지 실행!");
+
+            /*Toast.makeText(
                     getApplicationContext(),
                     "도난방지가 실행되었습니다.",
                     Toast.LENGTH_SHORT
-            ).show();
+            ).show();*/
 
-        }else {                                                                                      // 중지
+        }else {                                                                                      // OFF
 
-            Toast.makeText(
+            img.setImageResource(R.drawable.ic_alarm_off_black_24dp);
+            textView.setText("도난방지 중지!");
+
+            /*Toast.makeText(
                     getApplicationContext(),
                     "도난방지가 중지되었습니다.",
                     Toast.LENGTH_SHORT
-            ).show();
+            ).show();*/
         }
     }
 }

@@ -4,39 +4,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#4e59b1">
+    android:background="#e1eef6">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="50dp"
+        android:layout_margin="30dp"
         android:textSize="30dp"
         android:textAlignment="center"
+        android:textColor="#004e66"
         android:text="도난방지"/>
 
-    <ToggleButton
-        android:id="@+id/toggleButton"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
         android:layout_gravity="center"
-        android:layout_margin="30dp"
-        android:background="@drawable/rounded"
-        android:textSize="20dp"
-        android:textOff="도난방지 시작"
-        android:textOn="실행 중지"
-        android:onClick="onToggleClicked"/>
+        android:src="@drawable/ic_alarm_off_black_24dp"/>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
+        android:gravity="center"
+        android:padding="30dp"
+        android:textColor="#ff5f2e"
+        android:textSize="30dp"
+        android:text="도난방지 실행 중!"/>
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="30dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:textStyle="bold"
-            android:text="충전기 분리 시"/>
+            android:text="충전기 분리 감지"/>
 
         <Switch
             android:id="@+id/sw"
@@ -46,6 +53,7 @@
             android:thumb="@drawable/switch_thumb_selector"
             android:textOff="STOP"
             android:textOn="START"
+            android:checked="false"
             />
 
         <TextView
@@ -53,8 +61,55 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:textStyle="bold"
-            android:text="움직임 감지 시"/>
+            android:text="움직임 감지"/>-->
 
-   </LinearLayout>
+        <RadioGroup
+            android:id="@+id/rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <RadioButton
+                android:id="@+id/detectUSB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:padding="10dp"
+                android:text="충전기 감지"
+                android:background="@drawable/rounded_white"/>
+
+            <RadioButton
+                android:id="@+id/detectMove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:padding="10dp"
+                android:text="움직임 감지"
+                android:background="@drawable/rounded_white"/>
+
+        </RadioGroup>
+
+   <!--</LinearLayout>-->
+
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:background="@drawable/rounded_navy"
+        android:textColor="#fff"
+        android:textSize="20dp"
+        android:textOff="도난방지 시작"
+        android:textOn="실행 중지"
+        android:onClick="onToggleClicked"/>
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Switch" />
+
 
 </LinearLayout>
