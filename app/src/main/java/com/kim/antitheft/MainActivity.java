@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     getApplicationContext(),
                     "도난방지가 중지되었습니다.",
                     Toast.LENGTH_SHORT
-            ).show();*/
+            ).show();  */
         }
     }
 }
