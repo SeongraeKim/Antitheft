@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 public class MyBroadcastReceiver extends BroadcastReceiver {
 
-    public static Context mContext;
     MediaPlayer player;
 
     @Override
