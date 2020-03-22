@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     RadioButton detectUSB;
     RadioButton detectMove;
     ToggleButton toggleButton;
+    IntentFilter intentFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
         detectMove = (RadioButton) findViewById(R.id.detectMove);
         toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
 
+        receiver = new MyBroadcastReceiver();
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(Intent.ACTION_POWER_CONNECTED);
+        intentFilter.addAction(Intent.ACTION_POWER_DISCONNECTED);
+
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -48,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
 
                             if(isChecked){                                                           // ON
 
-                                receiver = new MyBroadcastReceiver();
+                                /*receiver = new MyBroadcastReceiver();
                                 IntentFilter intentFilter = new IntentFilter();
                                 intentFilter.addAction(Intent.ACTION_POWER_CONNECTED);
                                 intentFilter.addAction(Intent.ACTION_POWER_DISCONNECTED);
-                                registerReceiver(receiver, intentFilter);
+                                registerReceiver(receiver, intentFilter);*/
 
                                 Toast.makeText(
                                         getApplicationContext(),
@@ -90,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         boolean on = ((ToggleButton) v).isChecked();
 
         if(on){                                                                                      // ON
-
+            registerReceiver(receiver, intentFilter);
             img.setImageResource(R.drawable.ic_alarm_on_black_24dp);
             textView.setText("도난방지 실행!");
 
