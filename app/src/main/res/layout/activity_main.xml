@@ -45,7 +45,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:padding="10dp"
-                android:checked="true"
                 android:text="충전기 감지"
                 android:background="@drawable/rounded_white"/>
 

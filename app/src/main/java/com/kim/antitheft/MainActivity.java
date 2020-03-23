@@ -47,39 +47,13 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
                 if(checkedId == R.id.detectUSB){                                                     // 충전기 감지모드 작동
-
-                    toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                            if(isChecked){                                                           // ON
-
-                                /*receiver = new MyBroadcastReceiver();
-                                IntentFilter intentFilter = new IntentFilter();
-                                intentFilter.addAction(Intent.ACTION_POWER_CONNECTED);
-                                intentFilter.addAction(Intent.ACTION_POWER_DISCONNECTED);
-                                registerReceiver(receiver, intentFilter);*/
-
-                                Toast.makeText(
-                                        getApplicationContext(),
-                                        "도난방지가 실행되었습니다.",
-                                        Toast.LENGTH_SHORT
-                                ).show();
-
-                            }else {                                                                  // OFF
-                                unregisterReceiver(receiver);
-
-                                Toast.makeText(
-                                        getApplicationContext(),
-                                        "도난방지가 중지되었습니다.",
-                                        Toast.LENGTH_SHORT
-                                ).show();
-                            }
-                        }
-                    });
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "충전기 감지",
+                            Toast.LENGTH_SHORT
+                    ).show();
 
                 }else if (checkedId == R.id.detectMove){                                             // 움직임 감지모드 작동
-
                     Toast.makeText(
                             getApplicationContext(),
                             "움직임 감지",
@@ -115,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     getApplicationContext(),
                     "도난방지가 중지되었습니다.",
                     Toast.LENGTH_SHORT
-            ).show();   // ...
+            ).show();
         }
     }
 }
