@@ -1,6 +1,8 @@
 도난방지 App
 ============
-<img src="/img/AntiTheft.jpg" width="450px" height="300px"/><br>
+
+<img src="/AntiTheft.jpg" width="400px"/><br>
+
 > 2020-04-05
 > > 구현내용
 > > + UI 구현
