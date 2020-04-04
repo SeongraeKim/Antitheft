@@ -1,8 +1,6 @@
 도난방지 App
 ============
 
-<img src="/AntiTheft.jpg" width="400px"/><br>
-
 > 2020-04-05
 > > 구현내용
 > > + UI 구현
@@ -13,3 +11,5 @@
 > > + 움직임 감지기능
 > > + 볼륨 고정
 > > + 광고 추가 및 구글플레이 등록
+
+<img src="/AntiTheft.jpg" width="350px"/><br>
