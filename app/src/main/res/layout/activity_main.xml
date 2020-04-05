@@ -32,32 +32,29 @@
         android:textSize="30dp"
         android:text="도난방지 실행 중!"/>
 
-        <RadioGroup
-            android:id="@+id/rg"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center">
 
-            <RadioButton
+            <ToggleButton
                 android:id="@+id/detectUSB"
-                android:layout_width="wrap_content"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:padding="10dp"
-                android:text="충전기 감지"
-                android:background="@drawable/rounded_white"/>
+                android:layout_marginRight="20dp"
+                android:padding="15dp"
+                android:textOn="충전기 감지 \nON"
+                android:textOff="충전기 감지 \nOFF"/>
 
-            <RadioButton
+            <ToggleButton
                 android:id="@+id/detectMove"
-                android:layout_width="wrap_content"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:padding="10dp"
-                android:text="움직임 감지"
-                android:background="@drawable/rounded_white"/>
+                android:padding="15dp"
+                android:textOn="움직임 감지 \nON"
+                android:textOff="움직임 감지 \nOFF"/>
 
-        </RadioGroup>
+        </LinearLayout>
 
     <ToggleButton
         android:id="@+id/toggleButton"
@@ -69,7 +66,6 @@
         android:textColor="#fff"
         android:textSize="20dp"
         android:textOff="도난방지 시작"
-        android:textOn="실행 중지"
-        android:onClick="onToggleClicked"/>
+        android:textOn="실행 중지"/>
 
 </LinearLayout>

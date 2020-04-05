@@ -26,6 +26,8 @@
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
         </receiver>
+
+        <service android:name=".AlarmService"/>
     </application>
 
 </manifest>

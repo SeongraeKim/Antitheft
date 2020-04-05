@@ -19,10 +19,7 @@ public class MainActivity extends AppCompatActivity {
     MyBroadcastReceiver receiver;
     ImageView img;
     TextView textView;
-    RadioGroup rg;
-    RadioButton detectUSB;
-    RadioButton detectMove;
-    ToggleButton toggleButton;
+    ToggleButton detectUSB, detectMove, toggleButton;
     IntentFilter intentFilter;
 
     @Override
@@ -32,9 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
         img = (ImageView) findViewById(R.id.img);
         textView = (TextView) findViewById(R.id.textView);
-        rg = (RadioGroup) findViewById(R.id.rg);
-        detectUSB = (RadioButton) findViewById(R.id.detectUSB);
-        detectMove = (RadioButton) findViewById(R.id.detectMove);
+        detectUSB = (ToggleButton) findViewById(R.id.toggleButton);
+        detectMove = (ToggleButton) findViewById(R.id.toggleButton);
         toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
 
         receiver = new MyBroadcastReceiver();
@@ -42,54 +38,42 @@ public class MainActivity extends AppCompatActivity {
         intentFilter.addAction(Intent.ACTION_POWER_CONNECTED);
         intentFilter.addAction(Intent.ACTION_POWER_DISCONNECTED);
 
-        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        toggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
+            public void onClick(View v) {
+                if(toggleButton.isChecked()){                                                        // 도난방지 시작 버튼
 
-                if(checkedId == R.id.detectUSB){                                                     // 충전기 감지모드 작동
+                    if(detectUSB.isChecked()){
+                        registerReceiver(receiver, intentFilter);
+                    }
+
+                    img.setImageResource(R.drawable.ic_alarm_on_black_24dp);
+                    textView.setText("도난방지 실행!");
+
                     Toast.makeText(
                             getApplicationContext(),
-                            "충전기 감지",
+                            "도난방지가 실행되었습니다.",
                             Toast.LENGTH_SHORT
                     ).show();
 
-                }else if (checkedId == R.id.detectMove){                                             // 움직임 감지모드 작동
+                }else{                                                                               // 실행 중지 버튼
+                    unregisterReceiver(receiver);
+
+
+                    img.setImageResource(R.drawable.ic_alarm_off_black_24dp);
+                    textView.setText("도난방지 중지!");
+                    //detectUSB.setTextOff(null);
+
                     Toast.makeText(
                             getApplicationContext(),
-                            "움직임 감지",
+                            "도난방지가 중지되었습니다.",
                             Toast.LENGTH_SHORT
                     ).show();
+
+                    stopService(new Intent(getApplicationContext(), AlarmService.class));
                 }
             }
         });
 
     }// onCreate
-
-    public void onToggleClicked(View v){                                                             // 토글버튼 클릭 시 Toast
-
-        boolean on = ((ToggleButton) v).isChecked();
-
-        if(on){                                                                                      // ON
-            registerReceiver(receiver, intentFilter);
-            img.setImageResource(R.drawable.ic_alarm_on_black_24dp);
-            textView.setText("도난방지 실행!");
-
-            Toast.makeText(
-                    getApplicationContext(),
-                    "도난방지가 실행되었습니다.",
-                    Toast.LENGTH_SHORT
-            ).show();
-
-        }else {                                                                                      // OFF
-
-            img.setImageResource(R.drawable.ic_alarm_off_black_24dp);
-            textView.setText("도난방지 중지!");
-
-            Toast.makeText(
-                    getApplicationContext(),
-                    "도난방지가 중지되었습니다.",
-                    Toast.LENGTH_SHORT
-            ).show();
-        }
-    }
 }

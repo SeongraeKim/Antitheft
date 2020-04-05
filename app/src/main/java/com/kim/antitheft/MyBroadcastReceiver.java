@@ -13,7 +13,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        if(Intent.ACTION_POWER_CONNECTED == intent.getAction()){                                     // 충전기 연결 시
+        /*if(Intent.ACTION_POWER_CONNECTED == intent.getAction()){                                   // 충전기 연결 시
 
             Toast.makeText(
                     context,
@@ -21,21 +21,23 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                     Toast.LENGTH_SHORT
             ).show();
 
-            player.stop();
+            context.stopService(new Intent(context, AlarmService.class));
 
-        }else if (Intent.ACTION_POWER_DISCONNECTED == intent.getAction()){                           // 충전기 분리 시
+        }else */
+
+        if (Intent.ACTION_POWER_DISCONNECTED == intent.getAction()){                                 // 충전기 분리 시
 
             Toast.makeText(
                     context,
-                    "충전기 분리!",
+                    "충전기 분리됨!",
                     Toast.LENGTH_SHORT
             ).show();
 
-            player = MediaPlayer.create(context, R.raw.siren);
-            player.setLooping(true);
-            player.start();
+            context.startService(new Intent(context, AlarmService.class));
         }
     }
+
+
 }
 
 
